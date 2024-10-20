@@ -63,3 +63,15 @@ handleSelection(onesCells, (value) => { selectedOnes = value; });
 handleSelection(monthCells, (value) => { selectedMonth = value; });
 handleSelection(dayTensCells, (value) => { selectedDayTens = value; });
 handleSelection(dayOnesCells, (value) => { selectedDayOnes = value; });
+
+// Function to show the pop-up
+function showInstructions() {
+  document.getElementById("instructionsPopup").style.display = "block";
+  document.getElementById("overlay").style.display = "block";
+}
+
+// Function to hide the pop-up
+function closeInstructions() {
+  document.getElementById("instructionsPopup").style.display = "none";
+  document.getElementById("overlay").style.display = "none";
+}
