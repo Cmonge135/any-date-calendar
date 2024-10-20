@@ -1,0 +1,89 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+    /* Prevent vertical scroll on mobile */
+    margin: 0;
+    overflow: hidden;
+}
+
+.calendar-layout {
+    width: 500px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    /* Prevent vertical scroll on mobile */
+    max-width: 100%;
+    /* Ensure it resized properly on smaller screens */
+    box-sizing: border-box;
+    /* Ensure padding is included in the width */
+}
+
+.date-display {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#selected-date,
+#day-of-week {
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.columns {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 10px;
+}
+
+.column {
+    display: grid;
+    gap: 5px;
+}
+
+.cell {
+    background: #e0e0e0;
+    text-align: center;
+    padding: 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    user-select: none;
+    /* Ensures vertical and horizontal centering */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* height: 50px; */
+}
+
+.cell:hover {
+    background: #c0c0c0;
+}
+
+.cell.active {
+    /* background: #4caf50; */
+    color: red;
+}
+
+/* Prevent vertical scroll on mobile */
+/* Add space above the refrsh button */
+.refresh {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Prevent vertical scroll on mobile */
+.refresh:hover {
+    background-color: #0056b3;
+}
