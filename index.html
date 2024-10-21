@@ -1,19 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Any Date Trick</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <div class="calendar-layout">
+        <div id="overlay" onclick="closeInstructions()"></div>
         <!-- Header -->
         <div class="date-display">
-            <div id="selected-date"> Selected Date: <span class="secret" id="open"> 11/27/1992 </span></div>
+            <div id="selected-date"> Selected Date: <span class="secret" onclick="showInstructions()"> -?- </span></div>
+            <!-- <div id="day-of-week">Day of the Week: --</div> -->
         </div>
-        
+
+        <!-- Pop-up content -->
+        <div id="instructionsPopup">
+            <span class="close-btn" onclick="closeInstructions()">x</span>
+            <h2>Secret Info</h2>
+            <p><b>Check any date to see what day it was or will be.</b></p>
+            <p>Ex. Nov/27/1992 = 1 + / 27 + / 1=1900 + 4=92 >>> 33 <br/> 33/7("week") remainder 5 >>> Friday </p>
+            <h3>Century Code: 0-5-3-1</h3>
+            <p>1600 - 0 | 1700 - 5 | 1800 - 3 | 1900 - 1 | 2000 - 0 etc...</p>
+            <h3>Week & Month Code: 0-1-2-3-4-5-6</h3>
+            <p>If Leap year Jan =4 & Feb =0 <br/> It's Leap year if last two digits of the year can be divided by 4</p>
+            <ul>
+                <li>0 | Sun - Aug</li>
+                <li>1 | Mon - Feb, Mar, Nov</li>
+                <li>2 | Tue - Jun</li>
+                <li>3 | Wed - Sep, Dec</li>
+                <li>4 | Thu - Apr, Jul</li>
+                <li>5 | Fri - Jan, Oct</li>
+                <li>6 | Sat - May</li>
+            </ul>
+            <h3>Year Code (last 2 digits): 0-1-2-3-4-5-6</h3>
+            <p>Darker digits are leap years</p>
+            <ul>
+                <li>0 |  05, 11, <b>16</b>, 22, 33, 39, <b>44</b>, 50, 61, 67, <b>72</b>, 78, 89, 95</li>
+                <li>1 |  00, 06, 17, 23, <b>28</b>, 34, 45, 51, <b>56</b>, 62, 73, 79, <b>84</b>, 90</li>
+                <li>2 |  01, 07, <b>12</b>, 18, 29, 35, <b>40</b>, 46, 57, 63, <b>68</b>, 74, 85, 91, <b>96</b></li>
+                <li>3 |  02, 13, 19, <b>24</b>, 30, 41, 47, <b>52</b>, 58, 69, 75, <b>80</b>, 86, 97</li>
+                <li>4 |  03, <b>08</b>, 14, 25, 31, <b>36</b>, 42, 53, 59, <b>64</b>, 70, 81, 87, <b>92</b>, 98</li>
+                <li>5 |  09, 15, <b>20</b>, 26, 37, 43, <b>48</b>, 54, 65, 71, <b>76</b>, 82, 93, 99</li>
+                <li>6 |  <b>04</b>, 10, 21, 27, <b>32</b>, 38, 49, 55, <b>60</b>, 66, 77, 83, <b>88</b>, 94</li>
+            </ul>
+        </div>
+
         <div class="columns">
+
             <!-- Column 1: Months (abbreviated) -->
             <div class="column" id="month">
                 <div class="cell" data-value="0">Jan /01</div>
@@ -29,7 +66,7 @@
                 <div class="cell" data-value="10">Nov /11</div>
                 <div class="cell" data-value="11">Dec</div>
             </div>
-
+        
             <!-- Column 2: First digit of day (0-3) -->
             <div class="column" id="day-tens">
                 <div class="cell" data-value="0">0</div>
@@ -63,7 +100,7 @@
 
             <!-- Column 5: Third digit of the year (0, 10, 20, ..., 90) -->
             <div class="column" id="tens">
-                <div class="cell" data-value="0">0</div>
+                <div class="cell" data-value="0">00</div>
                 <div class="cell" data-value="1">10</div>
                 <div class="cell" data-value="2">20</div>
                 <div class="cell" data-value="3">30</div>
@@ -92,55 +129,14 @@
 
         <!-- Footer -->
         <div class="date-display">
-            <div id="day-of-week"> Day of the Week: Friday </div>
+            <!-- <div id="selected-date">Selected Date: --</div> -->
+            <div id="day-of-week"> Day of the Week: -?- </div>
             <button class="refresh">Restart</button>
         </div>
-
-        <div id="overlay"></div>
-        <!-- Pop-up content -->
-        <div id="instructionsPopup">
-            <span class="close-btn" id="close">x</span>
-            <h1>Secret Info</h1>
-            <h2 class="infoMain"><b>Check what day it was, is and will be!</b></h2>
-            <!-- <hr> -->
-            <p>
-                <b>Ex. Nov/27/1992 was a Friday!</b> <br>
-                November's month code is a 1 <br>
-                27<sup>th</sup> is a 27 <br>
-                1900s' century code is a 1 <br>
-                92's year code is a 4 <br>
-                That's 1 + 27 + 1 + 4 = 33 <br>
-                Dividing 33/7 "week" and taking the remainder gives you 5 (Friday)
-            </p>
-
-            <h3>Century Code: 0-5-3-1</h3>
-            <p>1600 - 0 | 1700 - 5 | 1800 - 3 | 1900 - 1 | 2000 - 0 etc...</p>
-
-            <h3>Week & Month Code: 0-1-2-3-4-5-6</h3>
-            <p>It's a leap year if the last two digits of any year can be divided by 4. <br /> In that case Jan = 4 &
-                Feb = 0 </p>
-            <ul>
-                <li>0 | Sun - Aug</li>
-                <li>1 | Mon - Feb, Mar, Nov</li>
-                <li>2 | Tue - Jun</li>
-                <li>3 | Wed - Sep, Dec</li>
-                <li>4 | Thu - Apr, Jul</li>
-                <li>5 | Fri - Jan, Oct</li>
-                <li>6 | Sat - May</li>
-            </ul>
-            <h3>Year Code (last 2 digits): 0-1-2-3-4-5-6</h3>
-            <p>Darker digits are leap years including <b>1600</b> and <b>2000</b></p>
-            <ul>
-                <li>0 | 05, 11, <b>16</b>, 22, 33, 39, <b>44</b>, 50, 61, 67, <b>72</b>, 78, 89, 95</li>
-                <li>1 | 00, 06, 17, 23, <b>28</b>, 34, 45, 51, <b>56</b>, 62, 73, 79, <b>84</b>, 90</li>
-                <li>2 | 01, 07, <b>12</b>, 18, 29, 35, <b>40</b>, 46, 57, 63, <b>68</b>, 74, 85, 91, <b>96</b></li>
-                <li>3 | 02, 13, 19, <b>24</b>, 30, 41, 47, <b>52</b>, 58, 69, 75, <b>80</b>, 86, 97</li>
-                <li>4 | 03, <b>08</b>, 14, 25, 31, <b>36</b>, 42, 53, 59, <b>64</b>, 70, 81, 87, <b>92</b>, 98</li>
-                <li>5 | 09, 15, <b>20</b>, 26, 37, 43, <b>48</b>, 54, 65, 71, <b>76</b>, 82, 93, 99</li>
-                <li>6 | <b>04</b>, 10, 21, 27, <b>32</b>, 38, 49, 55, <b>60</b>, 66, 77, 83, <b>88</b>, 94</li>
-            </ul>
-        </div>
     </div>
+    </div>
+
     <script src="script.js"></script>
 </body>
+
 </html>
