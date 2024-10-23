@@ -64,14 +64,17 @@ handleSelection(monthCells, (value) => { selectedMonth = value; });
 handleSelection(dayTensCells, (value) => { selectedDayTens = value; });
 handleSelection(dayOnesCells, (value) => { selectedDayOnes = value; });
 
+
 // Function to show the pop-up
-function showInstructions() {
+let openInstructions = document.getElementById('open')
+openInstructions.addEventListener('click', function() {
   document.getElementById("instructionsPopup").style.display = "block";
   document.getElementById("overlay").style.display = "block";
-}
+})
 
 // Function to hide the pop-up
-function closeInstructions() {
-  document.getElementById("instructionsPopup").style.display = "none";
-  document.getElementById("overlay").style.display = "none";
-}
+let closeInstructions = document.getElementById('close');
+closeInstructions.addEventListener('click', function() {
+    document.getElementById("instructionsPopup").style.display = "none";
+    document.getElementById("overlay").style.display = "none";
+})
